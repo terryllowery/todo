@@ -43,6 +43,8 @@ group :development, :test do
   gem 'selenium-webdriver'
 	# Add support for rspec tests
   gem 'rspec-rails', '~> 3.5'
+	# Add factory bot
+	gem 'factory_bot_rails'
 end
 
 group :development do
