@@ -15,7 +15,8 @@
 			var htmlString = "";
 			$.each(data, function (index, task) {
 				var checkedStatus = task.done? 'checked' : "";
-				var liElement = '<li><div class="view"><input class="toggle" type="checkbox"'
+				var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
+            " data-id='" + task.id + "'" +
             + checkedStatus +
             '><label>'
           + task.title +
@@ -25,6 +26,19 @@
 	    });
         var ulTodos = $('.todo-list');
         ulTodos.html(htmlString);
+
+        $('.toggle').change(function (e) {
+        	  var checkedStatus = Boolean($('.toggle').is(':checked'));
+        	  var itemId = $(e.target).data("id");
+            console.log("Target id: " + itemId + checkedStatus);
+
+            $.post("/tasks/" + itemId, {
+            	_method: "PUT",
+                task: {
+            		done: checkedStatus
+                }
+            });
+		})
     });
 	});
 </script>
