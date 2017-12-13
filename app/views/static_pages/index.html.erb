@@ -19,7 +19,14 @@
         event.preventDefault();
         console.log("Intercepted");
         var textBox = $('.new-todo');
-        console.log("Text:", textBox.val());
+        var payload = {
+        	task: {
+        		title: textBox.val()
+          }
+        };
+        $.post("/tasks", payload).success(function (data) {
+            console.log("Successful HTTP request");
+		})
 	});
 
 		// The taskHtml method takes in a JavaScript resepsentation
